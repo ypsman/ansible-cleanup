@@ -1,0 +1,45 @@
+---
+# tasks file for cleanup
+- name: Clean up apt
+  command: apt-get autoclean && apt-get autoremove
+
+- name: Stopping syslog
+  service:
+    name: syslog
+    enabled: yes
+    state: stopped
+
+- name: Clean /var/mail
+  shell: rm -rvf /var/mail/*
+
+- name: clean /tmp
+  shell: rm -rvf /tmp/*
+
+- name: clean /var/tmp
+  shell: rm -rvf /var/tmp/*
+
+- name: clean Postfix mail Logs
+  shell: for i in /var/log/mail.* ; do echo "" > $i; done
+
+- name: clean Old Logs
+  shell: rm -vf /var/log/*.1* && rm -vf var/log/*.log.* && rm -vf /var/log/apt/*
+
+- name: clean up User bash_history
+  shell: rm -vf /home/*/.bash_history
+
+- name: clean up root bash_history
+  shell: rm -vf /root/.bash_history
+
+- name: clear System Logs
+  shell: echo  > /var/log/"{{ item }}"
+  with_items:
+    - auth.log
+    - daemon.log
+    - debug
+    - kern.log
+    - syslog
+    - lastlog
+    - messages
+    - user.log
+    - wtmp
+    - btmp
