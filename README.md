@@ -4,6 +4,8 @@ ansible cleanup
 
 Clean a Server to create a Base Image from.
 
+After the run, shutdown the mashine and make a Clean base image.
+
 Clears:
 -------
   - maildir

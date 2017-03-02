@@ -3,12 +3,6 @@
 - name: Clean up apt
   command: apt-get autoclean && apt-get autoremove
 
-- name: Stopping rsyslog
-  service:
-    name: rsyslog
-    enabled: yes
-    state: stopped
-
 - name: Clean /var/mail
   shell: rm -rvf /var/mail/*
 
