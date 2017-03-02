@@ -3,9 +3,9 @@
 - name: Clean up apt
   command: apt-get autoclean && apt-get autoremove
 
-- name: Stopping syslog
+- name: Stopping rsyslog
   service:
-    name: syslog
+    name: rsyslog
     enabled: yes
     state: stopped
 
